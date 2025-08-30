@@ -44,7 +44,7 @@ eventEmitter.on("sendEmaliConfirmation", async (data) => {
 </div>`
   );
   if (!emailSender) {
-    return next(new AppError("Error sending message", 500));
+    throw new AppError("Error sending message", 500);
   }
 
     await dbService.updateOne({
@@ -91,7 +91,7 @@ eventEmitter.on("forgetPassword", async (data) => {
 </div>`
   );
   if (!emailSender) {
-    return next(new AppError("Error sending message", 500));
+    throw new AppError("Error sending message", 500);
   }
 
   await dbService.updateOne({
@@ -139,7 +139,7 @@ eventEmitter.on("oldEmailMessage", async (data) => {
 </div>`
   );
   if (!emailSender) {
-    return next(new AppError("Error sending message", 500));
+    throw new AppError("Error sending message", 500);
   }
 
   await dbService.updateOne({
@@ -185,7 +185,7 @@ eventEmitter.on("newEmailMessage", async (data) => {
 </div>`
   );
   if (!emailSender) {
-    return next(new AppError("Error sending message", 500));
+    throw new AppError("Error sending message", 500);
   }
 
   await dbService.updateOne({
@@ -230,7 +230,7 @@ eventEmitter.on("applicationAccepted", async (data) => {
     `
   );
   if (!emailSender) {
-    return next(new AppError("Error sending message", 500));
+    throw new AppError("Error sending message", 500);
   }
 
   await dbService.updateOne({
@@ -263,7 +263,7 @@ eventEmitter.on("applicationRejected", async (data) => {
     `
   );
   if (!emailSender) {
-    return next(new AppError("Error sending message", 500));
+    throw new AppError("Error sending message", 500);
   }
 
   await dbService.updateOne({

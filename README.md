@@ -122,10 +122,10 @@ Use `config/.env.example` as a template, and keep real secrets only in `config/.
 ```env
 # -------- Server --------
 PORT=3000
-MODE=DEV
+MODE=
 
 # -------- Database --------
-URI_CONNECTION=mongodb://127.0.0.1:27017/jobSearchApp
+URI_CONNECTION=mongodb://localhost:27017/jobSearchApp
 
 # -------- JWT / Auth --------
 SECRET_KEY=CHANGE_ME
@@ -133,8 +133,8 @@ ACCESS_SIGNETURE_USER=CHANGE_ME
 ACCESS_SIGNETURE_ADMIN=CHANGE_ME
 REFRESH_SIGNETURE_USER=CHANGE_ME
 REFRESH_SIGNETURE_ADMIN=CHANGE_ME
-PREFIX_TOKEN_USER=Bearer
-PREFIX_TOKEN_ADMIN=Admin
+PREFIX_TOKEN_USER=
+PREFIX_TOKEN_ADMIN=
 
 # -------- Hashing --------
 SALT_ROUNDS=12

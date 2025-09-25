@@ -11,14 +11,14 @@ export const decodedToken = async({authorization, tokenType, next} = {}) => {
     return next(new AppError("Token is required", 400));
   }
 
-  let ACCESS_SIGNETURE = undefined;
-  let REFRESH_SIGNETURE = undefined;
+  let ACCESS_SIGNATURE = undefined;
+  let REFRESH_SIGNATURE = undefined;
   if (prefix == process.env.PREFIX_TOKEN_ADMIN) {
-    ACCESS_SIGNETURE = process.env.ACCESS_SIGNETURE_ADMIN;
-    REFRESH_SIGNETURE = process.env.REFRESH_SIGNETURE_ADMIN;
+    ACCESS_SIGNATURE = process.env.ACCESS_SIGNATURE_ADMIN;
+    REFRESH_SIGNATURE = process.env.REFRESH_SIGNATURE_ADMIN;
   } else if (prefix == process.env.PREFIX_TOKEN_USER) {
-    ACCESS_SIGNETURE = process.env.ACCESS_SIGNETURE_USER;
-    REFRESH_SIGNETURE = process.env.REFRESH_SIGNETURE_USER;
+    ACCESS_SIGNATURE = process.env.ACCESS_SIGNATURE_USER;
+    REFRESH_SIGNATURE = process.env.REFRESH_SIGNATURE_USER;
   } else {
     return next(new AppError("Invalid token prefix", 400));
   }
@@ -26,7 +26,7 @@ export const decodedToken = async({authorization, tokenType, next} = {}) => {
   // verify token
   const decoded = await verifyToken({
     token, 
-    SIGNETURE: tokenType == tokenTypes.access ? ACCESS_SIGNETURE : REFRESH_SIGNETURE
+    SIGNATURE: tokenType == tokenTypes.access ? ACCESS_SIGNATURE : REFRESH_SIGNATURE
   });
   if (!decoded?.id) {
     return next(new AppError("Invalid token payload", 400));
@@ -89,14 +89,14 @@ export const authGraphQL = async({authorization, tokenType = tokenTypes.access, 
     throw new AppError("Token is required", 400);
   }
 
-  let ACCESS_SIGNETURE = undefined;
-  let REFRESH_SIGNETURE = undefined;
+  let ACCESS_SIGNATURE = undefined;
+  let REFRESH_SIGNATURE = undefined;
   if (prefix == process.env.PREFIX_TOKEN_ADMIN) {
-    ACCESS_SIGNETURE = process.env.ACCESS_SIGNETURE_ADMIN;
-    REFRESH_SIGNETURE = process.env.REFRESH_SIGNETURE_ADMIN;
+    ACCESS_SIGNATURE = process.env.ACCESS_SIGNATURE_ADMIN;
+    REFRESH_SIGNATURE = process.env.REFRESH_SIGNATURE_ADMIN;
   } else if (prefix == process.env.PREFIX_TOKEN_USER) {
-    ACCESS_SIGNETURE = process.env.ACCESS_SIGNETURE_USER;
-    REFRESH_SIGNETURE = process.env.REFRESH_SIGNETURE_USER;
+    ACCESS_SIGNATURE = process.env.ACCESS_SIGNATURE_USER;
+    REFRESH_SIGNATURE = process.env.REFRESH_SIGNATURE_USER;
   } else {
     throw new AppError("Invalid token prefix", 400);
   }
@@ -104,7 +104,7 @@ export const authGraphQL = async({authorization, tokenType = tokenTypes.access, 
   // verify token
   const decoded = await verifyToken({
     token, 
-    SIGNETURE: tokenType == tokenTypes.access ? ACCESS_SIGNETURE : REFRESH_SIGNETURE
+    SIGNATURE: tokenType == tokenTypes.access ? ACCESS_SIGNATURE : REFRESH_SIGNATURE
   });
   if (!decoded?.id) {
     throw new AppError("Invalid token payload", 400);
@@ -147,11 +147,11 @@ export const authSocket = async({socket}) => {
     return {message: "Token is required", statusCode: 401}
   }
 
-  let ACCESS_SIGNETURE = undefined;
+  let ACCESS_SIGNATURE = undefined;
   if (prefix == process.env.PREFIX_TOKEN_ADMIN) {
-    ACCESS_SIGNETURE = process.env.ACCESS_SIGNETURE_ADMIN;
+    ACCESS_SIGNATURE = process.env.ACCESS_SIGNATURE_ADMIN;
   } else if (prefix == process.env.PREFIX_TOKEN_USER) {
-    ACCESS_SIGNETURE = process.env.ACCESS_SIGNETURE_USER;
+    ACCESS_SIGNATURE = process.env.ACCESS_SIGNATURE_USER;
   } else {
     return {message: "Invalid token prefix", statusCode: 400}
   }
@@ -159,7 +159,7 @@ export const authSocket = async({socket}) => {
   // verify token
   const decoded = await verifyToken({
     token, 
-    SIGNETURE: ACCESS_SIGNETURE
+    SIGNATURE: ACCESS_SIGNATURE
   });
   if (!decoded?.id) {
     return {message: "Invalid token payload", statusCode: 400}

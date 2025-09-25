@@ -96,19 +96,19 @@ export const signIn = asyncHandler(async(req, res, next) => {
     // generate token
     const access_token = await generateToken({
         payload: {email, id: user._id}, 
-        SIGNETURE: 
+        SIGNATURE: 
         user.role == roleTypes.user ? 
-        process.env.ACCESS_SIGNETURE_USER : 
-        process.env.ACCESS_SIGNETURE_ADMIN,
+        process.env.ACCESS_SIGNATURE_USER : 
+        process.env.ACCESS_SIGNATURE_ADMIN,
         option: {expiresIn: "1d"}
     })
 
     const refresh_token = await generateToken({
         payload: {email, id: user._id}, 
-        SIGNETURE: 
+        SIGNATURE: 
         user.role == roleTypes.user ? 
-        process.env.REFRESH_SIGNETURE_USER : 
-        process.env.REFRESH_SIGNETURE_ADMIN,
+        process.env.REFRESH_SIGNATURE_USER : 
+        process.env.REFRESH_SIGNATURE_ADMIN,
         option: {expiresIn: "1w"}
     });
     let prefix;
@@ -158,10 +158,10 @@ export const loginWithGmail = asyncHandler(async(req, res, next) => {
     // generate token
     const access_token = await generateToken({
         payload: {email, id: user._id}, 
-        SIGNETURE: 
+        SIGNATURE: 
         user.role == roleTypes.user ? 
-        process.env.ACCESS_SIGNETURE_USER : 
-        process.env.ACCESS_SIGNETURE_ADMIN,
+        process.env.ACCESS_SIGNATURE_USER : 
+        process.env.ACCESS_SIGNATURE_ADMIN,
         option: {expiresIn: "1d"}
     })
 
@@ -234,10 +234,10 @@ export const refreshToken = asyncHandler(async(req, res, next) => {
     // generate tokens
     const access_token = await generateToken({
         payload: {email: user.email, id: user._id}, 
-        SIGNETURE: 
+        SIGNATURE: 
         user.role == roleTypes.user ? 
-        process.env.ACCESS_SIGNETURE_USER : 
-        process.env.ACCESS_SIGNETURE_ADMIN,
+        process.env.ACCESS_SIGNATURE_USER : 
+        process.env.ACCESS_SIGNATURE_ADMIN,
         option: {expiresIn: "1d"}
     })
     return res.status(201).json({msg: "Token refreshed successfully", Token: {access_token}})

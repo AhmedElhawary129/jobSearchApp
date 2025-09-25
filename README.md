@@ -153,7 +153,9 @@ API_SECRET=
 ```
 
 **.gitignore**
+Ensure `.gitignore` excludes real env files:
 ```gitignore
+# Environment
 config/.env
 config/*.env
 *.env

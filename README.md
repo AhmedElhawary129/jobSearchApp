@@ -1,5 +1,7 @@
 # Job Search Application (Node.js · Express · MongoDB)
 
+Production-ready backend for a **job marketplace**, built with **Express (ES Modules)** and **MongoDB (Mongoose)**. Provides **REST APIs** for Users/Companies/Jobs/Applications, a **GraphQL** endpoint for administrative queries, and **Socket.IO** for real-time chat. File uploads are handled via **Multer** with optional **Cloudinary** integration. Input validation uses **Joi**.
+
 [![CI](https://github.com/AhmedElhawary129/jobSearchApp/actions/workflows/ci.yml/badge.svg)](https://github.com/AhmedElhawary129/jobSearchApp/actions/workflows/ci.yml)
 ![Node](https://img.shields.io/badge/Node-22%2B-339933?logo=node.js&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-4.x-000000?logo=express&logoColor=white)
